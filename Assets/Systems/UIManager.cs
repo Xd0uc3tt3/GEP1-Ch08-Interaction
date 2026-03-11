@@ -1,16 +1,33 @@
 using UnityEngine;
+using TMPro;
+using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private GameObject interactionPrompt;
+    [SerializeField] private TextMeshProUGUI messageText;
+
+    public void ShowInteractionPrompt(bool show)
     {
-        
+        if (interactionPrompt != null)
+        {
+            interactionPrompt.SetActive(show);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShowMessage(string message)
     {
-        
+        StopAllCoroutines();
+        StartCoroutine(DisplayMessage(message));
+    }
+
+    private IEnumerator DisplayMessage(string message)
+    {
+        messageText.gameObject.SetActive(true);
+        messageText.text = message;
+
+        yield return new WaitForSeconds(3f);
+
+        messageText.gameObject.SetActive(false);
     }
 }
