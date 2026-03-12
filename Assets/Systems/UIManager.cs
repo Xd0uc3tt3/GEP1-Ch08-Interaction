@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowMessage(string message)
     {
+        Debug.Log($"ShowMessage");
         StopAllCoroutines();
         StartCoroutine(DisplayMessage(message));
     }
